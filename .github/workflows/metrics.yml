@@ -1,0 +1,172 @@
+name: Metrics
+on:
+  # Schedule daily at 2 AM UTC
+  schedule:
+    - cron: "0 2 * * *"
+  # Also allow manual runs
+  workflow_dispatch:
+  # And update on push to main
+  push:
+    branches: [main]
+
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Metrics embed
+        uses: lowlighter/metrics@latest
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: imgolamrabbani
+          template: classic
+          base: header, activity, community, repositories, metadata
+          config_timezone: Asia/Dhaka
+          config_display: large
+          config_animations: yes
+          
+          # Core plugins
+          plugin_lines: yes
+          plugin_languages: yes
+          plugin_languages_colors: github
+          plugin_languages_sections: most-used
+          plugin_languages_details: bytes-size, percentage
+          plugin_languages_threshold: 0%
+          plugin_languages_limit: 10
+          plugin_languages_analysis_timeout: 15
+          plugin_languages_categories: markup, programming
+          
+          # Activity plugin
+          plugin_activity: yes
+          plugin_activity_limit: 5
+          plugin_activity_days: 14
+          plugin_activity_filter: all
+          plugin_activity_visibility: all
+          plugin_activity_timestamps: yes
+          
+          # Achievements plugin
+          plugin_achievements: yes
+          plugin_achievements_secrets: yes
+          plugin_achievements_display: detailed
+          plugin_achievements_threshold: C
+          
+          # Notable contributions plugin
+          plugin_notable: yes
+          plugin_notable_types: commit
+          plugin_notable_repositories: no
+          plugin_notable_from: organization
+          
+          # Habits plugin
+          plugin_habits: yes
+          plugin_habits_from: 200
+          plugin_habits_days: 14
+          plugin_habits_facts: yes
+          plugin_habits_charts: yes
+          plugin_habits_trim: yes
+          
+          # Isocalendar plugin
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: half-year
+          
+          # Traffic plugin for public repos
+          plugin_traffic: yes
+          
+          # Stars plugin
+          plugin_stars: yes
+          plugin_stars_limit: 4
+          
+          # Stargazers plugin
+          plugin_stargazers: yes
+          plugin_stargazers_charts: yes
+          plugin_stargazers_charts_type: classic
+          
+          # Topics plugin
+          plugin_topics: yes
+          plugin_topics_mode: starred
+          plugin_topics_sort: stars
+          plugin_topics_limit: 15
+          
+          # Repositories plugin
+          plugin_repositories: yes
+          plugin_repositories_featured: imgolamrabbani/CyberAcademy, imgolamrabbani/NutrietScan
+          
+          # Introduction plugin
+          plugin_introduction: yes
+          plugin_introduction_title: yes
+          
+          # Follow-up plugin
+          plugin_followup: yes
+          plugin_followup_sections: repositories
+          
+          # People plugin
+          plugin_people: yes
+          plugin_people_types: followers
+          plugin_people_limit: 24
+          plugin_people_size: 28
+          plugin_people_identicons: no
+          plugin_people_shuffle: yes
+          
+      - name: Metrics Terminal
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics.terminal.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: imgolamrabbani
+          template: terminal
+          base: header, metadata
+          config_timezone: Asia/Dhaka
+          
+      - name: Metrics Classic with Languages
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics.languages.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: imgolamrabbani
+          template: classic
+          base: ""
+          config_timezone: Asia/Dhaka
+          config_display: large
+          config_animations: yes
+          plugin_languages: yes
+          plugin_languages_sections: most-used, recently-used
+          plugin_languages_colors: github
+          plugin_languages_details: bytes-size, percentage, lines
+          plugin_languages_threshold: 2%
+          plugin_languages_limit: 15
+          plugin_languages_analysis_timeout: 15
+          plugin_languages_categories: markup, programming, data
+          plugin_languages_recent_categories: markup, programming, data
+          plugin_languages_recent_load: 300
+          plugin_languages_recent_days: 30
+          
+      - name: Metrics Activity
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics.activity.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: imgolamrabbani
+          template: classic
+          base: ""
+          config_timezone: Asia/Dhaka
+          plugin_activity: yes
+          plugin_activity_limit: 15
+          plugin_activity_days: 30
+          plugin_activity_filter: all
+          plugin_activity_visibility: all
+          plugin_activity_timestamps: yes
+          plugin_activity_skipped: imgolamrabbani
+          
+      - name: Metrics Habits
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics.habits.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: imgolamrabbani
+          template: classic
+          base: ""
+          config_timezone: Asia/Dhaka
+          plugin_habits: yes
+          plugin_habits_from: 200
+          plugin_habits_days: 14
+          plugin_habits_facts: yes
+          plugin_habits_charts: yes
+          plugin_habits_charts_type: classic
