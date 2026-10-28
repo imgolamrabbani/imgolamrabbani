@@ -4,7 +4,7 @@
 
 **Security Researcher · Systems Bug Hunter · Open-Source Contributor**
 
-     [Auto-Sync](https://www.google.com/search?q=https://github.com/imgolamrabbani/imgolamrabbani/actions/workflows/update-readme.yml)
+[Auto-Sync](https://www.google.com/search?q=https://github.com/imgolamrabbani/imgolamrabbani/actions/workflows/update-readme.yml)
 
 </div>
 
