@@ -1,6 +1,6 @@
 <div align="center">
 
-# MD Golam Rabbani (`@imgolamrabbani`)
+# MD Golam Rabbani (`@imgolamrabbani`). 
 
 **Security Researcher · Systems Bug Hunter · Open-Source Contributor**
 
